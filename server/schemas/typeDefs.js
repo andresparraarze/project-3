@@ -29,13 +29,13 @@ const typeDefs = gql`
     email: String
     orders: [Order]
   }
-  
+
   type Seller {
     _id: ID
     firstName: String
     lastName: String
     email: String
-    orders: [Order]
+    products: [Product]
   }
 
   type Checkout {

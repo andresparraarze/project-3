@@ -139,7 +139,7 @@ const resolvers = {
     }
   },
 
-// Seller == I am not sure if this is correct
+// Seller
 
 Mutation: {
   addSeller: async (parent, args) => {
@@ -148,7 +148,6 @@ Mutation: {
     return { token, seller };
   },
 
-   
   updateSeller: async (parent, args, context) => {
     if (context.seller) {
       return await Seller.findByIdAndUpdate(context.seller._id, args, { new: true });
@@ -156,27 +155,7 @@ Mutation: {
 
     throw new AuthenticationError('Not logged in');
   },
-
-  login: async (parent, { email, password }) => {
-    const seller = await Seller.findOne({ email });
-
-    if (!seller) {
-      throw new AuthenticationError('Incorrect credentials');
-    }
-
-    const correctPw = await seller.isCorrectPassword(password);
-
-    if (!correctPw) {
-      throw new AuthenticationError('Incorrect credentials');
-    }
-
-    const token = signToken(seller);
-
-    return { token, seller },
-    }
-  }
+ }
 };
-
-// =======================================
 
 module.exports = resolvers;
