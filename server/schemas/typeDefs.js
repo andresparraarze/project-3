@@ -29,6 +29,14 @@ const typeDefs = gql`
     email: String
     orders: [Order]
   }
+  
+  type Seller {
+    _id: ID
+    firstName: String
+    lastName: String
+    email: String
+    orders: [Order]
+  }
 
   type Checkout {
     session: ID
@@ -44,6 +52,7 @@ const typeDefs = gql`
     products(category: ID, name: String): [Product]
     product(_id: ID!): Product
     user: User
+    seller: Seller
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
   }
@@ -52,6 +61,7 @@ const typeDefs = gql`
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addOrder(products: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String, password: String): User
+    updateSeller(firstName: String, lastName: String, email: String, password: String): Seller
     updateProduct(_id: ID!, quantity: Int!): Product
     login(email: String!, password: String!): Auth
   }
