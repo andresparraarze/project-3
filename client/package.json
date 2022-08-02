@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "jwt-decode": "^2.2.0",
+    "@apollo/client": "^3.5.8",
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
     "@tailwindcss/aspect-ratio": "^0.4.0",
@@ -19,6 +21,7 @@
     "react-scripts": "5.0.1",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
+
   },
   "scripts": {
     "start": "react-scripts start",
