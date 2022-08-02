@@ -141,21 +141,21 @@ const resolvers = {
 
 // Seller
 
-Mutation: {
-  addSeller: async (parent, args) => {
-    const seller = await Seller.create(args);
-    const token = signToken(seller);
-    return { token, seller };
-  },
+// Mutation: {
+//   addSeller: async (parent, args) => {
+//     const seller = await Seller.create(args);
+//     const token = signToken(seller);
+//     return { token, seller };
+//   },
 
-  updateSeller: async (parent, args, context) => {
-    if (context.seller) {
-      return await Seller.findByIdAndUpdate(context.seller._id, args, { new: true });
-    }
+//   updateSeller: async (parent, args, context) => {
+//     if (context.seller) {
+//       return await Seller.findByIdAndUpdate(context.seller._id, args, { new: true });
+//     }
 
-    throw new AuthenticationError('Not logged in');
-  },
- }
+//     throw new AuthenticationError('Not logged in');
+//   },
+//  }
 };
 
 module.exports = resolvers;
