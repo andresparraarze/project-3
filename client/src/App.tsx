@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Loginform from "./components/Loginform";
 
 const httpLink = createHttpLink({
-  uri:  'http://localhost:3001/graphql'
+  uri:  'https://github.com/andresparraarze/project-3/graphql'
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
