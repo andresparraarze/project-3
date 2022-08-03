@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/solid'
 import { RadioGroup } from '@headlessui/react'
+import { useQuery } from '@apollo/client';
+import { QUERY_PRODUCT_REVIEWS } from '../utils/queries';
 
 const product = {
     name: 'Beleza o Rio',
@@ -55,7 +57,6 @@ const product = {
     details:
     'Beleza o Rio was Designed by Giovani Guresci inspired by one of his trips to La Patagonia, he wanted to create an artistic resemblance of the beauty of the mountains combined with simplicity a mix that reminds everyone wearing it of the little but beautiful things in life.',
 }
-const reviews = { href: '#', average: 4, totalCount: 117 }
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -63,6 +64,21 @@ function classNames(...classes) {
 
 
 const Products = () => {
+  
+  const productId = "62e981937fe6a5aaebf3596d"
+  const { data } = useQuery(QUERY_PRODUCT_REVIEWS, {
+    variables: { _id: productId }
+  });
+  const merged = [].concat.apply([], data);
+  const average = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
+  const averageReview = average(merged).toFixed();
+  const totalReviews = merged.length
+  const reviewhref = "/"
+  console.log(merged)
+
+
+
+
 const [selectedColor, setSelectedColor] = useState(product.colors[0])
 const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   return (
@@ -152,16 +168,16 @@ const [selectedSize, setSelectedSize] = useState(product.sizes[2])
                     <StarIcon
                       key={rating}
                       className={classNames(
-                        reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
+                        averageReview > rating ? 'text-gray-900' : 'text-gray-200',
                         'h-5 w-5 flex-shrink-0'
                       )}
                       aria-hidden="true"
                     />
                   ))}
                 </div>
-                <p className="sr-only">{reviews.average} out of 5 stars</p>
-                <a href={reviews.href} className="ml-3 text-sm font-medium text-yellow-600 hover:text-yellow-400">
-                  {reviews.totalCount} reviews
+                <p className="sr-only">{averageReview} out of 5 stars</p>
+                <a href={reviewhref} className="ml-3 text-sm font-medium text-yellow-600 hover:text-yellow-400">
+                  {totalReviews} reviews
                 </a>
               </div>
             </div>

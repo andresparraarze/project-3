@@ -24,7 +24,14 @@ db.once('open', async () => {
       image: 'cookie-tin.jpg',
       category: categories[0]._id,
       price: 2.99,
-      quantity: 500
+      quantity: 500,
+      reviews: [
+        { stars: 5 },
+        { stars: 4 },
+        { stars: 3 },
+        { stars: 2 },
+        { stars: 1 },
+      ]
     },
     {
       name: 'Canned Coffee',

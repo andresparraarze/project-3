@@ -3,12 +3,14 @@ import Cart from "./components/Cart";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Products from "./components/Products";
+import Loginform from "./components/Loginform";
+import SignupForm from "./components/Signupform";
 import Shop from "./components/Shop";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink  } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
-  uri:  '/graphql'
+  uri:  'http://localhost:3001/graphql',
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
@@ -31,14 +33,18 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <div>
-      <Navbar/>
-      <Cart/>
-      <Home/>
-      <Shop/>
-      <Products/>
-      <About/>
-    </div>
+    <ApolloProvider client={client}>
+      <div>
+        <Navbar/>
+        <Loginform />
+        <SignupForm />
+        <Cart/>
+        <Home/>
+        <Shop/>
+        <Products/>
+        <About/>
+      </div>
+    </ApolloProvider>
   );
 }
 

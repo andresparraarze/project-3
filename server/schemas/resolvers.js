@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Seller, User, Product, Category, Order } = require('../models');
+const { Seller, User, Product, Category, Order, Review } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -90,6 +90,15 @@ const resolvers = {
     }
   },
   Mutation: {
+    addReview: async (parent, { _id, stars }, context) => {
+      if (context.user) {
+        const review = new Review({ stars });
+
+        await Product.findByIdAndUpdate(_id, { $push: { reviews: review }}, { new: true })
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
@@ -136,26 +145,21 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
+    // addSeller: async (parent, args) => {
+    //   const seller = await Seller.create(args);
+    //   const token = signToken(seller);
+    //   return { token, seller };
+    // },
+  
+    // updateSeller: async (parent, args, context) => {
+    //   if (context.seller) {
+    //     return await Seller.findByIdAndUpdate(context.seller._id, args, { new: true });
+    //   }
+  
+    //   throw new AuthenticationError('Not logged in');
+    // },
   },
-
-// Seller
-
-Mutation: {
-  addSeller: async (parent, args) => {
-    const seller = await Seller.create(args);
-    const token = signToken(seller);
-    return { token, seller };
-  },
-
-  updateSeller: async (parent, args, context) => {
-    if (context.seller) {
-      return await Seller.findByIdAndUpdate(context.seller._id, args, { new: true });
-    }
-
-    throw new AuthenticationError('Not logged in');
-  },
- }
 };
 
 module.exports = resolvers;
