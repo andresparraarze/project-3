@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations.js';
+import { ADD_USER } from '../utils/mutations.js';
 import Auth from '../utils/auth.js';
 import { Link } from 'react-router-dom';
 
-const Loginform = () => {
-  const [login] = useMutation(LOGIN_USER);
+const SignupForm = () => {
+  const [signup] = useMutation(ADD_USER);
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [firstName, setFirstname] = useState("")
+  const [lastName, setLastname] = useState("")
 
   const handleFormSubmit = async (event) => {
       event.preventDefault();
       try {
-          const response = await login ({
-              variables: { email: email, password: password},
+          const response = await signup ({
+              variables: { firstName: firstName, lastName: lastName, email: email, password: password},
           });
-          const token = response.data.login.token;
+          const token = response.data.addUser.token;
           Auth.login(token);
       } catch (e) {
           console.log(e);
@@ -32,6 +34,10 @@ const Loginform = () => {
       setEmail(inputValue);
     } else if (inputType === "password") {
       setPassword(inputValue);
+    } else if (inputType === "firstName") {
+      setFirstname(inputValue);
+    } else if (inputType === "lastName") {
+      setLastname(inputValue);
     }
   }
 
@@ -45,17 +51,47 @@ const Loginform = () => {
               src="https://i.pinimg.com/736x/68/a1/11/68a11164a33033eaa2b95eecedd46a3c.jpg"
               alt="Lea Lacroix logo"
             />
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign up an account</h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
-              <Link to={"/signup"} className="font-medium text-yellow-600 hover:text-yellow-500">
-                Signup here
+              <Link to={"/login"} className="font-medium text-yellow-600 hover:text-yellow-500">
+                Login here
               </Link>
             </p>
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleFormSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
+              <div>
+                <label htmlFor="first-name" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="first-name"
+                  name="firstName"
+                  type="firstName"
+                  value={firstName}
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                  placeholder="First Name"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="last-name" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="last-name"
+                  name="lastName"
+                  type="lastName"
+                  value={lastName}
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                  placeholder="Last Name"
+                  onChange={handleInputChange}
+                />
+              </div>
               <div>
                 <label htmlFor="email-address" className="sr-only">
                   Email address
@@ -98,7 +134,7 @@ const Loginform = () => {
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-yellow-400 group-hover:text-yellow-600" aria-hidden="true" />
                 </span>
-                Sign in
+                Sign up
               </button>
             </div>
           </form>
@@ -107,4 +143,4 @@ const Loginform = () => {
   )
 }
 
-export default Loginform
+export default SignupForm

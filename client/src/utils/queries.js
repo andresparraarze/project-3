@@ -90,5 +90,14 @@ export const QUERY_USER = gql`
       }
     }
   }
-  `;
+`;
 
+export const QUERY_PRODUCT_REVIEWS = gql`
+  query getReviews ($_id: ID!) {
+    product(_id: $_id) {
+      reviews {
+        stars
+      }
+    }
+  }
+`;

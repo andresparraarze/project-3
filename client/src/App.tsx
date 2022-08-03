@@ -6,6 +6,7 @@ import Shop from "./components/Shop";
 import NoMatch from "./components/NoMatch";
 import OrderHistory from "./components/OrderHistory";
 import WishList from "./components/WishList";
+import SignupForm from "./components/Signupform";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink  } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -61,6 +62,10 @@ function App() {
           path="/login" 
           element={<Loginform/>} 
         /> 
+        <Route
+          path="/signup"
+          element={<SignupForm/>}
+        />
         <Route 
           path="/orderhistory" 
           element={<OrderHistory/>} 

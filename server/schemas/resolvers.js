@@ -105,6 +105,15 @@ const resolvers = {
     }
   },
   Mutation: {
+    addReview: async (parent, { _id, stars }, context) => {
+      if (context.user) {
+        const review = new Review({ stars });
+    
+        await Product.findByIdAndUpdate(_id, { $push: { reviews: review }}, { new: true })
+      }
+    
+      throw new AuthenticationError('Not logged in');
+    },
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
