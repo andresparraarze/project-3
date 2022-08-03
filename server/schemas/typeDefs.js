@@ -24,12 +24,18 @@ const typeDefs = gql`
     products: [Product]
   }
 
+  type WishList {
+    _id: ID
+    products: [Product]
+  }
+
   type User {
     _id: ID
     firstName: String
     lastName: String
     email: String
     orders: [Order]
+    wishlist: [WishList]
   }
 
   type Seller {
@@ -52,10 +58,11 @@ const typeDefs = gql`
   type Query {
     categories: [Category]
     products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
+    product(productId: ID!): Product
     user: User
     seller: Seller
     order(_id: ID!): Order
+    wishlist(_id: ID!): WishList
     checkout(products: [ID]!): Checkout
   }
 
@@ -66,6 +73,7 @@ const typeDefs = gql`
     updateSeller(firstName: String, lastName: String, email: String, password: String): Seller
     updateProduct(_id: ID!, quantity: Int!): Product
     login(email: String!, password: String!): Auth
+    addToWishList(products: [ID]!): WishList
   }
 `;
 

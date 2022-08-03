@@ -23,13 +23,17 @@ const resolvers = {
 
       return await Product.find(params).populate('category');
     },
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate('category');
+    product: async (parent, { productId }) => {
+      return await Product.findOne({ _id: productId }).populate('category');
     },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'orders.products',
+          populate: 'category'
+        })
+        .populate({
+          path: 'wishlist.products',
           populate: 'category'
         });
 
@@ -48,6 +52,17 @@ const resolvers = {
         });
 
         return user.orders.id(_id);
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+    wishlist: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'wishlist.products'
+        });
+
+        return user.wishlist.id(_id);
       }
 
       throw new AuthenticationError('Not logged in');
@@ -104,6 +119,18 @@ const resolvers = {
         await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 
         return order;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+    addToWishList: async (parent, { products }, context) => {
+      console.log('Server auth context log', context);
+      if (context.user) {
+        const list = new WishList({ products });
+
+        await User.findByIdAndUpdate(context.user._id, { $push: { wishlist: list } });
+
+        return list;
       }
 
       throw new AuthenticationError('Not logged in');

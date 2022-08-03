@@ -2,6 +2,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { useParams, Link } from 'react-router-dom';
 import { QUERY_ALL_PRODUCTS } from '../utils/queries';
 import { ADD_TO_WISHLIST, ADD_ORDER } from '../utils/mutations';
+import image1 from '../assets/largemain1.jpg';
 
 const Shop = () => {
   // const { category } = useParams();
@@ -10,30 +11,16 @@ const Shop = () => {
   const [addToWishlist, { error }] = useMutation(ADD_TO_WISHLIST);
   const [addOrder, { e }] = useMutation(ADD_ORDER);
 
-  console.log(loading);
   const productData = data?.products || [];
-console.log('in shop', productData);
-
-const addToCart = async(_id) => {
-  try {
-    const { data } = await addOrder({variables: { products: _id },});
-    window.location.reload();
-  } catch (err) {
-    console.error(err);
-  }
-};
-const addToWish = async(_id) => {
-  try {
-    const { data } = await addToWishlist({variables: { products: _id },});
-    console.log(data);
-    window.location.reload();
-  } catch (err) {
-    console.error(err);
-  }
-};
 
   return (
     <>
+    <div name='home' className='w-full h-screen'>
+        <div className='max-w-[2000px] mx-auto px-8 flex flex-col justify-center items-center h-full select-none pt-[170px] pb-[130px]'>
+            <img className='aspectw-16 aspect-h-9'
+              style={{width: '2000px'}} src={image1} alt='home'/>
+        </div>
+    </div>
     {productData.length ? (
     <div name='shop' className='w-full h-auto bg-[#000000] text-white'>
       
@@ -52,7 +39,7 @@ const addToWish = async(_id) => {
           {productData.map((product) => (
             
           <div key={product._id} className='shadow-md shadow-[#3b3b3d] hover:scale-110 hover:cursor-pointer duration-500'>
-            {/* <Link to={`/products/${product._id}`}> */}
+            <Link to={`/product/${product._id}`}>
               <img className='w-100 mx-auto' src={`/images/${product.images}`} alt={product.name} />
               <p className='text-black font-bold my-4'>
                 {product.name}
@@ -60,15 +47,7 @@ const addToWish = async(_id) => {
               <p className='text-black font-bold my-4'>
                 ${product.price}
               </p>
-              <div class="inline-flex p-3">
-                <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onClick={addToCart} >
-                  Cart
-                </button>
-                <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onClick={addToWish}>
-                  WishList
-                </button>
-              </div>
-            {/* </Link> */}
+            </Link>
           </div>
           ))}
         </div>

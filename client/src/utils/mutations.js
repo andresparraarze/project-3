@@ -19,11 +19,10 @@ export const ADD_ORDER = gql`
         _id
         name
         description
+        images
+        hightlights
+        details
         price
-        quantity
-        category {
-          name
-        }
       }
     }
   }
@@ -36,11 +35,10 @@ export const ADD_TO_WISHLIST = gql`
         _id
         name
         description
+        images
+        hightlights
+        details
         price
-        quantity
-        category {
-          name
-        }
       }
     }
   }

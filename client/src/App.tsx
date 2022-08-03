@@ -1,12 +1,15 @@
 import About from "./components/About";
 import Cart from "./components/Cart";
-import Home from "./components/Home";
-import Navbar from "./components/Navbar";
 import Products from "./components/Products";
+import Navbar from "./components/Navbar";
 import Shop from "./components/Shop";
+import NoMatch from "./components/NoMatch";
+import OrderHistory from "./components/OrderHistory";
+import WishList from "./components/WishList";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink  } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Loginform from "./components/Loginform";
 
 const httpLink = createHttpLink({
   uri:  'http://localhost:3001/graphql'
@@ -33,14 +36,46 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <Router>
     <div>
       <Navbar/>
       {/* <Cart/> */}
-      <Home/>
-      <Shop/>
-      {/* <Products/> */}
-      <About/>
+      <Routes>
+        <Route 
+          path="/" 
+          element={<Shop/>} 
+        />
+        <Route 
+          path="/about" 
+          element={<About/>} 
+        />
+        <Route 
+          path="/product/:id" 
+          element={<Products/>} 
+        />
+        <Route 
+          path="/cart" 
+          element={<Cart/>} 
+        />
+        <Route 
+          path="/login" 
+          element={<Loginform/>} 
+        /> 
+        <Route 
+          path="/orderhistory" 
+          element={<OrderHistory/>} 
+        /> 
+        <Route 
+          path="/wishlist" 
+          element={<WishList/>} 
+        /> 
+        <Route
+          path="*" 
+          element={<NoMatch />} 
+        />
+      </Routes>
     </div>
+    </Router>
     </ApolloProvider>
   );
 }
