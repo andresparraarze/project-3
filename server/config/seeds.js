@@ -5,11 +5,13 @@ db.once('open', async () => {
   await Category.deleteMany();
 
   const categories = await Category.insertMany([
-    { name: 'Food' },
-    { name: 'Household Supplies' },
-    { name: 'Electronics' },
-    { name: 'Books' },
-    { name: 'Toys' }
+    { name: 'Men' },
+    { name: 'Women' },
+    { name: 'New Season' },
+    { name: 'Accessories' },
+    { name: 'Vintage' },
+    { name: 'Old Season'},
+    { name: 'Special Edition'}
   ]);
 
   console.log('categories seeded');
@@ -18,119 +20,210 @@ db.once('open', async () => {
 
   const products = await Product.insertMany([
     {
-      name: 'Tin of Cookies',
+      name: 'Future Suit',
+      price: '1800',
+      category: [ 'Men', 'Clothing' ],
+      images: 'model-1.jpg',
       description:
-        'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-      image: 'cookie-tin.jpg',
-      category: categories[0]._id,
-      price: 2.99,
-      quantity: 500,
-      reviews: [
-        { stars: 5 },
-        { stars: 4 },
-        { stars: 3 },
-        { stars: 2 },
-        { stars: 1 },
-      ]
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 3, totalCount: 97 }
     },
     {
-      name: 'Canned Coffee',
+      name: 'Elegance a la France',
+      price: '2100',
+      category: [ 'Men', 'Clothing' ],
+      images: 'model-2.jpg',
       description:
-        'Praesent sed lacinia mauris. Nulla congue nibh magna, at feugiat nunc scelerisque quis. Donec iaculis rutrum vulputate. Suspendisse lectus sem, vulputate ac lectus sed, placerat consequat dui.',
-      image: 'canned-coffee.jpg',
-      category: categories[0]._id,
-      price: 1.99,
-      quantity: 500
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 4, totalCount: 197 }
     },
     {
-      name: 'Toilet Paper',
-      category: categories[1]._id,
+      name: 'Pavani',
+      price: '1100',
+      category: [ 'Men', 'Clothing' ],
+      images: 'model-3.jpg',
       description:
-        'Donec volutpat erat erat, sit amet gravida justo sodales in. Phasellus tempus euismod urna. Proin ultrices nisi ut ipsum congue, vitae porttitor libero suscipit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam lacinia a nisi non congue.',
-      image: 'toilet-paper.jpg',
-      price: 7.99,
-      quantity: 20
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 4, totalCount: 150 }
     },
     {
-      name: 'Handmade Soap',
-      category: categories[1]._id,
+      name: 'Gianca Glamuer',
+      price: '1900',
+      category: [ 'Men', 'Clothing' ],
+      images: 'model-4.jpg',
       description:
-        'Praesent placerat, odio vel euismod venenatis, lectus arcu laoreet felis, et fringilla sapien turpis vestibulum nisl.',
-      image: 'soap.jpg',
-      price: 3.99,
-      quantity: 50
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 4, totalCount: 126 }
     },
     {
-      name: 'Set of Wooden Spoons',
-      category: categories[1]._id,
+      name: 'Le Valverde',
+      price: '1250',
+      category: [ 'Men', 'Clothing' ],
+      images:  'model-5.jpg',
       description:
-        'Vivamus ut turpis in purus pretium mollis. Donec turpis odio, semper vel interdum ut, vulputate at ex. Duis dignissim nisi vel tortor imperdiet finibus. Aenean aliquam sagittis rutrum.',
-      image: 'wooden-spoons.jpg',
-      price: 14.99,
-      quantity: 100
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 2, totalCount: 110 }
     },
     {
-      name: 'Camera',
-      category: categories[2]._id,
+      name: 'Toronto Inverno',
+      price: '1790',
+      category: [ 'Men', 'Clothing' ],
+      images: 'model-6.jpg',
       description:
-        'Vestibulum risus metus, luctus non tortor quis, tincidunt consectetur ex. Nullam vitae lobortis ligula, ut sagittis massa. Curabitur consectetur, tellus at pulvinar venenatis, erat augue cursus erat, eu ullamcorper eros lectus ultrices ipsum. Integer rutrum, augue vitae auctor venenatis, turpis turpis elementum orci, at sagittis risus mi a leo.',
-      image: 'camera.jpg',
-      price: 399.99,
-      quantity: 30
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 2, totalCount: 10 }
     },
     {
-      name: 'Tablet',
-      category: categories[2]._id,
+      name: 'Old School',
+      price: '2200',
+      category: [ 'Men', 'Clothing' ],
+      images: 'model-7.jpg',
       description:
-        'In sodales, ipsum quis ultricies porttitor, tellus urna aliquam arcu, eget venenatis purus ligula ut nisi. Fusce ut felis dolor. Mauris justo ante, aliquet non tempus in, tempus ac lorem. Aliquam lacinia dolor eu sem eleifend ultrices. Etiam mattis metus metus. Sed ligula dui, placerat non turpis vitae, suscipit volutpat elit. Phasellus sagittis, diam elementum suscipit fringilla, libero mauris scelerisque ex, ac interdum diam erat non sapien.',
-      image: 'tablet.jpg',
-      price: 199.99,
-      quantity: 30
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 4, totalCount: 10 }
     },
     {
-      name: 'Tales at Bedtime',
-      category: categories[3]._id,
+      name: 'Old School',
+      price: '2200',
+      category: [ 'Men', 'Clothing' ],
+      images:'model-8.jpg',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ornare diam quis eleifend rutrum. Aliquam nulla est, volutpat non enim nec, pharetra gravida augue. Donec vitae dictum neque. Pellentesque arcu lorem, fringilla non ligula ac, tristique bibendum erat. Ut a semper nibh. Quisque a mi et mi tempor ultricies. Maecenas eu ipsum eu enim hendrerit accumsan at euismod urna.',
-      image: 'bedtime-book.jpg',
-      price: 9.99,
-      quantity: 100
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 4, totalCount: 10 }
     },
     {
-      name: 'Spinning Top',
-      category: categories[4]._id,
-      description: 'Ut vulputate hendrerit nibh, a placerat elit cursus interdum.',
-      image: 'spinning-top.jpg',
-      price: 1.99,
-      quantity: 1000
+      name: 'Beleza',
+      price: '1200',
+      category: [ 'Men', 'Clothing' ],
+      images:  'model-6.jpg',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 3, totalCount: 70 }
     },
     {
-      name: 'Set of Plastic Horses',
-      category: categories[4]._id,
+      name: 'Beleza o Rio',
+      price: '1500',
+      category: [ 'Men', 'Clothing' ],
+      images:  'model-3.jpg',
       description:
-        'Sed a mauris condimentum, elementum enim in, rhoncus dui. Phasellus lobortis leo odio, sit amet pharetra turpis porta quis.',
-      image: 'plastic-horses.jpg',
-      price: 2.99,
-      quantity: 1000
+        'Beleza o Rio was Designed by Giovani Guresci inspired by one of his trips to La Patagonia, he wanted to create an artistic resemblance of the beauty of the mountains combined with simplicity a mix that reminds everyone wearing it of the little but beautiful things in life.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Beleza o Rio was Designed by Giovani Guresci inspired by one of his trips to La Patagonia, he wanted to create an artistic resemblance of the beauty of the mountains combined with simplicity a mix that reminds everyone wearing it of the little but beautiful things in life.',
+      reviews: { average: 4, totalCount: 117 }
     },
     {
-      name: 'Teddy Bear',
-      category: categories[4]._id,
+      name: 'Old School',
+      price: '2200',
+      category: [ 'Men', 'Clothing' ],
+      images:'model-8.jpg',
       description:
-        'Vestibulum et erat finibus erat suscipit vulputate sed vitae dui. Ut laoreet tellus sit amet justo bibendum ultrices. Donec vitae felis vestibulum, congue augue eu, finibus turpis.',
-      image: 'teddy-bear.jpg',
-      price: 7.99,
-      quantity: 100
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 4, totalCount: 10 }
     },
     {
-      name: 'Alphabet Blocks',
-      category: categories[4]._id,
+      name: 'Beleza',
+      price: '1200',
+      category: [ 'Men', 'Clothing' ],
+      images:  'model-6.jpg',
       description:
-        'Morbi consectetur viverra urna, eu fringilla turpis faucibus sit amet. Suspendisse potenti. Donec at dui ac sapien eleifend hendrerit vel sit amet lectus.',
-      image: 'alphabet-blocks.jpg',
-      price: 9.99,
-      quantity: 600
-    }
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      highlights: [
+        'Designed by the best European Artists of this decade',
+        'Natural materials',
+        'Ethically sourced',
+        'Ultra-soft',
+      ],
+      details:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper malesuada proin libero nunc consequat interdum varius sit amet. Sed sed risus pretium quam vulputate dignissim. Hac habitasse platea dictumst quisque sagittis purus sit amet. Eget nullam non nisi est sit amet facilisis. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit. Dui vivamus arcu felis bibendum ut tristique et.',
+      reviews: { average: 3, totalCount: 70 }
+    },
+   
   ]);
 
   console.log('products seeded');
@@ -144,7 +237,12 @@ db.once('open', async () => {
     password: 'password12345',
     orders: [
       {
-        products: [products[0]._id, products[0]._id, products[1]._id]
+        products: [products[0]._id, products[2]._id, products[1]._id]
+      }
+    ],
+    wishlist: [
+      {
+        products: [products[0]._id, products[3]._id]
       }
     ]
   });

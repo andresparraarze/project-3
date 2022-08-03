@@ -3,6 +3,7 @@ import { LockClosedIcon } from '@heroicons/react/solid'
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations.js';
 import Auth from '../utils/auth.js';
+import { Link } from 'react-router-dom';
 
 const SignupForm = () => {
   const [signup] = useMutation(ADD_USER);
@@ -53,9 +54,9 @@ const SignupForm = () => {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign up an account</h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
-              <a href="/" className="font-medium text-yellow-600 hover:text-yellow-500">
+              <Link to={"/login"} className="font-medium text-yellow-600 hover:text-yellow-500">
                 Login here
-              </a>
+              </Link>
             </p>
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleFormSubmit}>

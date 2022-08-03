@@ -1,16 +1,19 @@
 import About from "./components/About";
 import Cart from "./components/Cart";
-import Home from "./components/Home";
-import Navbar from "./components/Navbar";
 import Products from "./components/Products";
-import Loginform from "./components/Loginform";
-import SignupForm from "./components/Signupform";
+import Navbar from "./components/Navbar";
 import Shop from "./components/Shop";
+import NoMatch from "./components/NoMatch";
+import OrderHistory from "./components/OrderHistory";
+import WishList from "./components/WishList";
+import SignupForm from "./components/Signupform";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink  } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Loginform from "./components/Loginform";
 
 const httpLink = createHttpLink({
-  uri:  'http://localhost:3001/graphql',
+  uri:  'http://localhost:3001/graphql'
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
@@ -34,16 +37,50 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div>
-        <Navbar/>
-        <Loginform />
-        <SignupForm />
-        <Cart/>
-        <Home/>
-        <Shop/>
-        <Products/>
-        <About/>
-      </div>
+      <Router>
+    <div>
+      <Navbar/>
+      {/* <Cart/> */}
+      <Routes>
+        <Route 
+          path="/" 
+          element={<Shop/>} 
+        />
+        <Route 
+          path="/about" 
+          element={<About/>} 
+        />
+        <Route 
+          path="/product/:id" 
+          element={<Products/>} 
+        />
+        <Route 
+          path="/cart" 
+          element={<Cart/>} 
+        />
+        <Route 
+          path="/login" 
+          element={<Loginform/>} 
+        /> 
+        <Route
+          path="/signup"
+          element={<SignupForm/>}
+        />
+        <Route 
+          path="/orderhistory" 
+          element={<OrderHistory/>} 
+        /> 
+        <Route 
+          path="/wishlist" 
+          element={<WishList/>} 
+        /> 
+        <Route
+          path="*" 
+          element={<NoMatch />} 
+        />
+      </Routes>
+    </div>
+    </Router>
     </ApolloProvider>
   );
 }
