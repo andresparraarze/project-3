@@ -12,7 +12,7 @@ It also includes a payment platform.
 
 ## Links
 
-[Deployed application](https://facebook.github.io/create-react-app/docs/getting-started).
+[Deployed application](https://damp-earth-50504.herokuapp.com/).
 
 [GitHub repository](https://github.com/andresparraarze/project-3.git).
 
